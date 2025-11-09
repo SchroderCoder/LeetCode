@@ -2,23 +2,19 @@ class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
         int n = nums.size();
-
-        // Step 1: Replace invalid values
         for (int i = 0; i < n; i++) {
             if (nums[i] <= 0 || nums[i] > n) {
                 nums[i] = n + 1;
             }
         }
 
-        // Step 2: Mark numbers present
         for (int i = 0; i < n; i++) {
             int val = abs(nums[i]);
             if (val <= n) {
                 nums[val - 1] = -abs(nums[val - 1]);
             }
         }
-
-        // Step 3: Find first missing
+        
         for (int i = 0; i < n; i++) {
             if (nums[i] > 0) {
                 return i + 1;
